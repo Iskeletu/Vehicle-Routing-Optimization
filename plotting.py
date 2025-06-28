@@ -13,18 +13,21 @@ import numpy as np
 import matplotlib.pyplot as mpl
 
 
-def plot_route(route: list[int], points: np.ndarray) -> None:
+def plot_route(route: list[int], points: np.ndarray) -> mpl.Figure:
     """
     Plots the route on a 2D grid by connecting the given points in the specified order.
 
     Parameters:
-        - route: list[int] -> A list of point indices representing the visitation order.
-        - points: np.ndarray -> A 2D array of coordinates (x, y) for each point.
+        - `route: list[int]` -> A list of point indices representing the visitation order.
+        - `points: numpy.ndarray` -> A 2D array of coordinates (x, y) for each point.
+
+    Returns:
+        - The generated plot figure as a `matplotlib.Figure` object.
     """
 
-    ordered_points = points[route + [route[0]]]  # Ensures the loop is closed.
+    ordered_points = points[route+[route[0]]]  # Ensures the loop is closed.
 
-    _, ax = mpl.subplots()
+    fig, ax = mpl.subplots()
     ax.plot(ordered_points[:, 0], ordered_points[:, 1], 'o-', color='green')
 
     for i, (x, y) in enumerate(points):
@@ -35,6 +38,17 @@ def plot_route(route: list[int], points: np.ndarray) -> None:
     ax.set_ylabel("Y")
     ax.grid(True)
     ax.set_aspect("equal")
+    return fig
+
+
+def display_route(_:mpl.Figure) -> None:
+    """
+    Displays a MatPlotLib figure object containing a plotted route.
+
+    Parameters:
+        - `fig: matplotlib.Figure` -> A MatPlotLib figure object returned by `plot_route()`.
+    """
+
     mpl.show()
 
 
