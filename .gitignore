@@ -4,9 +4,11 @@
 ## Except what I want to keep:
 # Python source files.
 !config.py
+!file_handling.py
 !main.py
 !plotting.py
 !routing.py
+!run_experiments.py
 !utils.py
 
 # Output directory and its contents.
