@@ -14,49 +14,58 @@ Date: June 2025
 import random
 
 # Internal Modules:
-import utils
-import config as cfg
 import routing
 import plotting
+import config as cfg
+from utils import seed_user_input, generate_seeds
 
 # External Modules:
-from scipy.spatial.distance import cdist
 import numpy as np
+from scipy.spatial.distance import cdist
 
 # Constants:
 CONFIG = cfg.load_config()
-NUM_POINTS = CONFIG['Number_of_Points']
-GRID_SIZE = CONFIG['Grid_Size']
-POPULATION_SIZE = CONFIG['Population_Size']
+DECIMAL_DIGITS = 2
 
 
-def main(seed: int | None) -> None:
+def main(seed:int|None) -> None:
     """
     Script entry point.
 
     Parameters:
-        - seed: int | None -> Numerical seed for reproducibility, None type will result in random behavior.
+        - `seed: int | None` -> Numerical seed for reproducibility, `None` type will result in random behavior.
     """
-    if seed is not None:
-        np.random.seed(seed); random.seed(seed)
-        print(f"Seed set to: '{seed}'.\n")
-    else:
+
+    if seed is None:
         print("No seed provided, using random behavior.\n")
+        seed = generate_seeds(1)[0] # Generates a random 32 bit numerical seed.
 
-    points = routing.gen_2d_grid(NUM_POINTS, GRID_SIZE)
-    distance_matrix = cdist(points, points)
-    population = routing.gen_initial_pop(POPULATION_SIZE, NUM_POINTS)
-    fitness_scores = [routing.evaluate_route(route, distance_matrix) for route in population]
+    
+    # Seeds the plot point generation and population:
+    np.random.seed(seed)
+    random.seed(seed)
+    print(f"Seed set to: '{seed}'.\n")
 
+
+
+    points = routing.gen_2d_grid(CONFIG['Number_of_Points'], CONFIG['Grid_Size']) # Generate random (or seeded) collection of points.
+    distance_matrix = cdist(points, points) # Compute paiwise distances.
+    population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points']) # Generate initial population.
+    fitness_scores = [routing.evaluate_route(route, distance_matrix) for route in population] # Evaluate each route.
+
+    # Select the best route based on the shortest total distance:
     best_index = np.argmin(fitness_scores)
     best_route = population[best_index]
     best_distance = fitness_scores[best_index]
 
-    print("Best route found (initial population):", best_route)
-    print("Total distance:", round(best_distance, 2))
-    plotting.plot_route(best_route, points)
-    print(f"\nSummary: {NUM_POINTS} points, population size = {POPULATION_SIZE}, seed: '{seed}'.")
+    # Displays plotted route:
+    plotting.display_route(plotting.plot_route(best_route, points))
+
+    print(f"Best route found (initial population): {best_route}.")
+    print(f"Total distance: {round(best_distance, DECIMAL_DIGITS)}.")
+    print(f"\nSummary: {CONFIG['Number_of_Points']} points, population size = {CONFIG['Population_Size']}, seed: '{seed}'.\n")
+
 
 #This is a script file.
 if __name__ == '__main__':
-    main(utils.seed_user_input())
+    main(seed_user_input())
