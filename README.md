@@ -17,16 +17,21 @@ Este projeto implementa uma solução para o Problema de Roteamento de Veículos
 
 ## 📁 Estrutura do Projeto
 ```python
-├── main.py               # Execução padrão com entrada de seed
-├── run_experiments.py    # Execução automatizada com múltiplas seeds
-├── config.ini            # Parâmetros principais de execução
-├── config.py             # Leitura, validação e verificação dos parâmetros
-├── routing.py            # Geração de grid, população e avaliação de rotas
-├── plotting.py           # Geração de figuras com o módulo MatPlotLib
-├── file_handling.py      # Salvamento de arquivos (imagens, CSV)
-├── utils.py              # Entrada segura de seed
-├── requirements.txt      # Dependências do projeto
-└── output/               # Resultados gerados (.png, .csv)
+├── src/                # Diretório de arquivos fonte do projeto.
+│   ├── config.py           # Parâmetros principais de execução.
+│   ├── file_handling.py    # Manipulação de arquivos (imagens, CSV).
+│   ├── main.py             # Execução padrão com entrada de seed manual.
+│   ├── plotting.py         # Geração de figuras com o módulo MatPlotLib.
+│   ├── routing.py          # Geração de grid, população e avaliação de rotas.
+│   ├── run_experiments.py  # Execução automatizada com múltiplas seeds aleatórias.
+│   └── utils.py            # Coleção de funções utilitárias compartilhadas.
+├── output/             # Diretório de resultados gerados (.png, .csv).
+│   ├── experiments.csv     # Resultado compilado de todas as melhores rotas obtidas em execução automatizada.
+│   └── route_seed_*.png    # Arquivos de imagens das melhores rotas obtidas em execução automatizada.
+├── config.ini          # Parâmetros principais de execução.
+├── requirements.txt    # Dependências do projeto.
+├── README.md           # Arquivo de documentação do projeto.
+└── LICENSE             # Licença para utilização do projeto, uso livre com base na licença MIT.
 ```
 
 ---
