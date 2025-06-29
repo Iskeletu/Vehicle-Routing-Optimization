@@ -16,8 +16,7 @@
 !output/**
 
 # Configuration files (any location).
-!*.ini
-!*/**/*.ini
+!**/*.ini
 
 # Project metadata.
 !.gitignore
