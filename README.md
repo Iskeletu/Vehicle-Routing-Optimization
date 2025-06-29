@@ -51,7 +51,7 @@ Number_of_Seeds = Número de execuções com diferentes valores de seed (control
 
 ### Execução padrão com entrada manual de seed:
 ```bash
-python .\main.py
+python .\src\main.py
 ```
 
 ### Execução automatizada com várias seeds:

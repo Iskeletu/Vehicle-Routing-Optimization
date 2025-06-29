@@ -3,6 +3,8 @@
 
 ## Except what I want to keep:
 # Python source files.
+!src/
+src/**
 !config.py
 !file_handling.py
 !main.py

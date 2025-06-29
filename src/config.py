@@ -11,7 +11,8 @@ import configparser
 from pathlib import Path
 
 # Constants:
-STANDARD_PATH = Path('.\\config.INI').absolute()
+PROJECT_DIRECTORY = Path(os.path.abspath(__file__)).parent.parent.resolve()
+STANDARD_PATH = Path(f'{PROJECT_DIRECTORY}\\config.INI').absolute()
 
 
 def _validate_config(config:dict) -> None:
