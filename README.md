@@ -6,7 +6,7 @@ Este projeto implementa uma solução para o Problema de Roteamento de Veículos
 
 ## 🎯 Objetivo
 - Gerar um conjunto de pontos aleatórios no plano 2D.
-- Criar uma população inicial de rotas (permutações dos pontos).
+- Criar uma população inicial de rotas (permutações dos pontos de coleta).
 - Avaliar as rotas com base na distância total percorrida.
 - Visualizar a melhor rota obtida.
 - Executar múltiplas simulações com seeds diferentes.
@@ -41,7 +41,7 @@ Population_Size = Número de rotas diferentes geradas aleatoriamente para formar
 [OUTPUT]
 Folder_Name = Nome do diretório onde os arquivos de saída serão salvos (imagens e CSV).
 CSV_File_Name = Nome do arquivo onde os resultados das simulações serão armazenados.
-Image_File_Name = Prefixo utilizado para nomear os arquivos de imagem com as rotas encontradas.
+Image_File_Name = Prefixo utilizado para nomear os arquivos de imagem com as melhores rotas encontradas.
 Number_of_Seeds = Número de execuções com diferentes valores de seed (controle de aleatoriedade).
 ```
 

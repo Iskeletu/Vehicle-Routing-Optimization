@@ -1,5 +1,5 @@
 """
-Main script file, the project should be run from this file.
+Main script file, the project should be executed from this file.
 
 Creates a 2D grid with N points with random coordinates, simulating collection locations 
 for the vehicle routing problem. The points are uniformly distributed within a defined 

@@ -44,10 +44,10 @@ def run_experiment(seed:int) -> dict:
     points = routing.gen_2d_grid(CONFIG['Number_of_Points'], CONFIG['Grid_Size'])
     dist_matrix = cdist(points, points)
     pop = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
-    fitness = [routing.evaluate_route(route, dist_matrix) for route in pop]
-    best_index = np.argmin(fitness)
+    evaluation = [routing.evaluate_route(route, dist_matrix) for route in pop]
+    best_index = np.argmin(evaluation)
     best_route = pop[best_index]
-    best_distance = fitness[best_index]
+    best_distance = evaluation[best_index]
 
     fig = plotting.plot_route(best_route, points)
     fh.save_plot(CONFIG, fig, str(seed))
