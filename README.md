@@ -16,7 +16,7 @@ Este projeto implementa uma solução para o Problema de Roteamento de Veículos
 ---
 
 ## 📁 Estrutura do Projeto
-```python
+```bash
 ├── src/                # Diretório de arquivos fonte do projeto.
 │   ├── config.py           # Parâmetros principais de execução.
 │   ├── file_handling.py    # Manipulação de arquivos (imagens, CSV).
