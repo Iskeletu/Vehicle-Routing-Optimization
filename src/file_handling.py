@@ -52,9 +52,22 @@ def save_results_csv(config:dict, data:list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True) # Ensures path is ok.
 
     with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["seed", "distance", "time", "route"])
+        writer = csv.DictWriter(f, fieldnames=[
+            "Seed",
+            "RIPA_Distance", "RIPA_Time", "RIPA_Route",
+            "EA_Distance", "EA_Time", "EA_Route"
+        ])
         writer.writeheader()
-        writer.writerows(data)
+        for entry in data:
+            writer.writerow({
+                "Seed": entry["Seed"],
+                "RIPA_Distance": entry["RIPA"]["Distance"],
+                "RIPA_Time": entry["RIPA"]["Time"],
+                "RIPA_Route": entry["RIPA"]["Route"],
+                "EA_Distance": entry["EA"]["Distance"],
+                "EA_Time": entry["EA"]["Time"],
+                "EA_Route": entry["EA"]["Route"]
+            })
 
 
 # This is NOT a script file.
