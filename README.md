@@ -18,22 +18,22 @@ Este projeto implementa uma solução para o Problema de Roteamento de Veículos
 
 ## 📁 Estrutura do Projeto
 ```bash
-├── src/                    # Diretório de arquivos fonte do projeto.
-│   ├── config.py               # Parâmetros principais de execução.
-│   ├── execute_experiments.py  # Execução automatizada com múltiplas seeds aleatórias.
-│   ├── file_handling.py        # Manipulação de arquivos (imagens, CSV).
-│   ├── genetic_evolution.py    # Implementação do algoritmo genético evolutivo.
-│   ├── main.py                 # Execução padrão com entrada de seed manual.
-│   ├── plotting.py             # Geração de figuras com o módulo MatPlotLib.
-│   ├── routing.py              # Geração de grid, população e avaliação de rotas.
-│   └── utils.py                # Coleção de funções utilitárias compartilhadas.
-├── output/                 # Diretório de resultados gerados (.png, .csv).
-│   ├── experiments.csv         # Resultado compilado de todas as melhores rotas obtidas em execução automatizada.
-│   └── route_seed_*.png        # Arquivos de imagens das melhores rotas obtidas em execução automatizada.
-├── config.ini              # Parâmetros principais de execução.
-├── requirements.txt        # Dependências do projeto.
-├── README.md               # Arquivo de documentação do projeto.
-└── LICENSE                 # Licença para utilização do projeto, uso livre com base na licença MIT.
+├── src/                              # Diretório de arquivos fonte do projeto.
+│   ├── config.py                         # Parâmetros principais de execução.
+│   ├── execute_experiments.py            # Execução automatizada com múltiplas seeds aleatórias.
+│   ├── file_handling.py                  # Manipulação de arquivos (imagens, CSV).
+│   ├── genetic_evolution.py              # Implementação do algoritmo genético evolutivo.
+│   ├── main.py                           # Execução padrão com entrada de seed manual.
+│   ├── plotting.py                       # Geração de figuras com o módulo MatPlotLib.
+│   ├── routing.py                        # Geração de grid, população e avaliação de rotas.
+│   └── utils.py                          # Coleção de funções utilitárias compartilhadas.
+├── output/                           # Diretório de resultados gerados (.png, .csv).
+│   ├── experiments.csv                   # Resultado compilado de todas as melhores rotas obtidas em execução automatizada.
+│   └── route_seed_{seed}_{algoritmo}.png # Imagens das melhores rotas por seed e algoritmo.
+├── config.ini                        # Parâmetros principais de execução.
+├── requirements.txt                  # Dependências do projeto.
+├── README.md                         # Arquivo de documentação do projeto.
+└── LICENSE                           # Licença para utilização do projeto, uso livre com base na licença MIT.
 ```
 
 ---
