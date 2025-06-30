@@ -50,11 +50,11 @@ def main(seed:int|None) -> None:
     dist_matrix = cdist(points, points)
 
     # Random Initial Population Algorithm (RIPA):
-    RIP_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
-    RIP_evaluation = [routing.evaluate_route(r, dist_matrix) for r in RIP_population]
-    best_RIP_idx = np.argmin(RIP_evaluation)
-    best_RIP_route = RIP_population[best_RIP_idx]
-    best_RIP_distance = RIP_evaluation[best_RIP_idx]
+    RIPA_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
+    RIPA_evaluation = [routing.evaluate_route(r, dist_matrix) for r in RIPA_population]
+    best_RIPA_idx = np.argmin(RIPA_evaluation)
+    best_RIPA_route = RIPA_population[best_RIPA_idx]
+    best_RIPA_distance = RIPA_evaluation[best_RIPA_idx]
 
     # Evolutionary Algorithm (EA):
     EA_result = genetic_evolution.run_evolutionary_experiment(CONFIG, points, seed)
@@ -62,8 +62,8 @@ def main(seed:int|None) -> None:
     # Display both random initial population and evolutionary results:
     print(
         "=== RANDOM INITIAL POPULATION ===\n"
-        f"Best route: {best_RIP_route}\n"
-        f"Total distance: {round(best_RIP_distance, DECIMAL_DIGITS)}\n"
+        f"Best route: {best_RIPA_route}\n"
+        f"Total distance: {round(best_RIPA_distance, DECIMAL_DIGITS)}\n"
     )
 
     print(
@@ -73,7 +73,7 @@ def main(seed:int|None) -> None:
     )
 
     # Plot final results from each type of evaluation:
-    plotting.display_route(plotting.plot_route(best_RIP_route, points, "Random Initial Population"))
+    plotting.display_route(plotting.plot_route(best_RIPA_route, points, "Random Initial Population"))
     plotting.display_route(plotting.plot_route(EA_result['route'], points, "Evolutionary Result"))
 
     # Summary:

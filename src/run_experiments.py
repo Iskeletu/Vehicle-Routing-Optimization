@@ -58,13 +58,13 @@ def _run_comparative(seed:int) -> dict:
     dist_matrix = cdist(points, points)
 
     # Random Initial Population Algorithm (RIPA):
-    RIP_start_time = time()
-    RIP_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
-    RIP_evaluation = [routing.evaluate_route(route, dist_matrix) for route in RIP_population]
-    rand_best_idx = np.argmin(RIP_evaluation)
-    best_RIP_route = RIP_population[rand_best_idx]
-    best_RIP_distance = round(RIP_evaluation[rand_best_idx], DECIMAL_DIGITS)
-    RIP_elapsed_time = round(time() - RIP_start_time, DECIMAL_DIGITS)
+    RIPA_start_time = time()
+    RIPA_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
+    RIPA_evaluation = [routing.evaluate_route(route, dist_matrix) for route in RIPA_population]
+    rand_best_idx = np.argmin(RIPA_evaluation)
+    best_RIPA_route = RIPA_population[rand_best_idx]
+    best_RIPA_distance = round(RIPA_evaluation[rand_best_idx], DECIMAL_DIGITS)
+    RIPA_elapsed_time = round(time() - RIPA_start_time, DECIMAL_DIGITS)
 
     # Evolutionary Algorithm (EA):
     EA_start_time = time()
@@ -73,15 +73,15 @@ def _run_comparative(seed:int) -> dict:
     EA_elapsed_time = round(time() - EA_start_time, DECIMAL_DIGITS)
 
     # Save RIPA and EA route plots:
-    fh.save_plot(CONFIG, plotting.plot_route(best_RIP_route, points, f"{seed} - Random Initial Population Algorithm"), "RIPA", str(seed))
+    fh.save_plot(CONFIG, plotting.plot_route(best_RIPA_route, points, f"{seed} - Random Initial Population Algorithm"), "RIPA", str(seed))
     fh.save_plot(CONFIG, plotting.plot_route(EA_result['route'], points, f"{seed} - Evolutionary Algorithm"), "EA", str(seed))
     
     return {
         "Seed": seed,
         "RIPA": {
-            "Distance": best_RIP_distance,
-            "Time": RIP_elapsed_time,
-            "Route": best_RIP_route
+            "Distance": best_RIPA_distance,
+            "Time": RIPA_elapsed_time,
+            "Route": best_RIPA_route
         },
         "EA": {
             "Distance": best_EA_distance,
