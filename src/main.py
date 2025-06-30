@@ -72,7 +72,7 @@ def main(seed:int|None) -> None:
         f"Total distance: {round(EA_result['distance'], DECIMAL_DIGITS)}\n"
     )
 
-    # Plot final results from each type of fitness:
+    # Plot final results from each type of algorithm:
     plotting.display_route(plotting.plot_route(best_RIPA_route, points, "Random Initial Population"))
     plotting.display_route(plotting.plot_route(EA_result['route'], points, "Evolutionary Result"))
 

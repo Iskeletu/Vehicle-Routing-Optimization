@@ -1,5 +1,5 @@
 """
-Collenction of shared utility functions:
+A collection of shared utility functions:
     - `seed_user_input()`   -> Handles seed user input to allow reproducible execution.
     - `generate_seeds()`    -> Handles generation of list of 32 bit numerical seeds.
 
@@ -37,7 +37,7 @@ def generate_seeds(number_of_seeds:int) -> list[int]:
         - `number_of_seeds: int` -> Size of the list of seeds.
 
     Return:
-        - A list of 32 bit interger seeds.
+        - A list of 32 bit integer seeds.
     """
     
     seed_list:list[int] = []

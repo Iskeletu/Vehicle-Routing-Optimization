@@ -62,7 +62,7 @@ def load_config(path:Path=STANDARD_PATH) -> dict:
         - `ValueError`: If any expected key is missing or has the wrong type.
     """
     
-    # Validates configuration file existance given the path parameter:
+    # Validates configuration file existence given the path parameter:
     if not os.path.exists(path):
         raise FileNotFoundError(f"Configuration file not found at: {path}")
 
@@ -70,7 +70,7 @@ def load_config(path:Path=STANDARD_PATH) -> dict:
     configfile:configparser.ConfigParser = configparser.ConfigParser()
     configfile.read(path)
 
-    # Validates configuration file structure integrty:
+    # Validates configuration file structure integrity:
     if 'PARAMETERS' not in configfile or 'OUTPUT' not in configfile:
         raise KeyError("Missing required sections in the configuration file: [PARAMETERS] and/or [OUTPUT]")
 

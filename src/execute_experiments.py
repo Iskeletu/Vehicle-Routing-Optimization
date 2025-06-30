@@ -31,7 +31,7 @@ DECIMAL_DIGITS = 2
 def _execute_comparative(seed:int) -> dict:
     """
     Private local function: Executes a single simulation comparison between the Random Initial Population Algorithm
-    (RIPA) and the Evolutionary Algoritm (EA) using the provided seed.
+    (RIPA) and the Evolutionary Algorithm (EA) using the provided seed.
 
     Parameters:
         - `seed: int` -> Seed value for reproducibility.
