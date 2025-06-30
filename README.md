@@ -20,7 +20,7 @@ Este projeto implementa uma solução para o Problema de Roteamento de Veículos
 ```bash
 ├── src/                    # Diretório de arquivos fonte do projeto.
 │   ├── config.py               # Parâmetros principais de execução.
-│   ├── execute_experiments.py      # Execução automatizada com múltiplas seeds aleatórias.
+│   ├── execute_experiments.py  # Execução automatizada com múltiplas seeds aleatórias.
 │   ├── file_handling.py        # Manipulação de arquivos (imagens, CSV).
 │   ├── genetic_evolution.py    # Implementação do algoritmo genético evolutivo.
 │   ├── main.py                 # Execução padrão com entrada de seed manual.
