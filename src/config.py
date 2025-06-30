@@ -47,14 +47,14 @@ def load_config(path:Path=STANDARD_PATH) -> dict:
 
     Returns:
         - A dictionary type containing the following keys: \n
-            `'Number_of_Points': int`       -> .
-            `'Grid_Size': int`              -> .
-            `'Population_Size': int`        -> .
-            `'Number_of_Generations': int`  -> .
-            `'Output_Folder': str`          -> .
-            `'CSV_Name': str`               -> .
-            `'Image_Name_Template': str`    -> .
-            `'Number_of_Seeds': int`        -> .
+            `'Number_of_Points': int`
+            `'Grid_Size': int`
+            `'Population_Size': int`
+            `'Number_of_Generations': int`
+            `'Output_Folder': str`
+            `'CSV_Name': str`
+            `'Image_Name_Template': str`
+            `'Number_of_Seeds': int`
 
     Raises:
         - `FileNotFoundError`: If the file does not exist.
