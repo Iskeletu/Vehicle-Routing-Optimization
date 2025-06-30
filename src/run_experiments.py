@@ -118,7 +118,7 @@ def run_all():
 
     # Save results to CSV file:
     fh.save_results_csv(CONFIG, results)
-    print("\nResults saved to:", Path(f"{CONFIG['Output_Folder_Name']}\\{CONFIG['CSV_File_Name']}.csv").absolute(), "\n")
+    print("Results saved to:", Path(f"{CONFIG['Output_Folder_Name']}\\{CONFIG['CSV_File_Name']}.csv").absolute(), "\n")
 
 
 #This is a script file.
