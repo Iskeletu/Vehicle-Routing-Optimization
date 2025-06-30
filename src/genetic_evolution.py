@@ -109,8 +109,8 @@ def execute_evolutionary_experiment(config:dict, points:np.ndarray, seed:int, cr
 
     distance_matrix = cdist(points, points)                                                     # Compute paiwise distances.
     population = routing.gen_initial_pop(config['Population_Size'], config['Number_of_Points']) # Generate initial population.
-    evaluation_scores = [routing.evaluate_route(r, distance_matrix) for r in population]        # Evaluate each route.
-    history = [min(evaluation_scores)]                                                          # Initializes convergence tracking by storing the smallest distance from the initial population.
+    fitness_scores = [routing.evaluate_route(r, distance_matrix) for r in population]           # Evaluate each route.
+    history = [min(fitness_scores)]                                                             # Initializes convergence tracking by storing the smallest distance from the initial population.
 
     for _ in range(config['Number_of_Generations']):
         # Selection (tournament size 2)
@@ -130,15 +130,15 @@ def execute_evolutionary_experiment(config:dict, points:np.ndarray, seed:int, cr
         # Mutation
         mutated = [_swap_mutation(child, mutation_rate) for child in offspring]
 
-        # Evaluation and replacement
+        # Evaluation and replacement:
         population = mutated
-        evaluation_scores = [routing.evaluate_route(r, distance_matrix) for r in population]
-        history.append(min(evaluation_scores))
+        fitness_scores = [routing.evaluate_route(r, distance_matrix) for r in population]
+        history.append(min(fitness_scores))
 
-    best_idx:np.intp = np.argmin(evaluation_scores)
+    best_idx:np.intp = np.argmin(fitness_scores)
     return {
         "route": population[best_idx],
-        "distance": evaluation_scores[best_idx],
+        "distance": fitness_scores[best_idx],
         "points": points,
         "history": history,
     }

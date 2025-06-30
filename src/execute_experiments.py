@@ -60,10 +60,10 @@ def _execute_comparative(seed:int) -> dict:
     # Random Initial Population Algorithm (RIPA):
     RIPA_start_time = time()
     RIPA_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
-    RIPA_evaluation = [routing.evaluate_route(route, dist_matrix) for route in RIPA_population]
-    rand_best_idx = np.argmin(RIPA_evaluation)
+    RIPA_fitness = [routing.evaluate_route(route, dist_matrix) for route in RIPA_population]
+    rand_best_idx = np.argmin(RIPA_fitness)
     best_RIPA_route = RIPA_population[rand_best_idx]
-    best_RIPA_distance = round(RIPA_evaluation[rand_best_idx], DECIMAL_DIGITS)
+    best_RIPA_distance = round(RIPA_fitness[rand_best_idx], DECIMAL_DIGITS)
     RIPA_elapsed_time = round(time() - RIPA_start_time, DECIMAL_DIGITS)
 
     # Evolutionary Algorithm (EA):
