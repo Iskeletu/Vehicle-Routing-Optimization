@@ -13,13 +13,14 @@ import numpy as np
 import matplotlib.pyplot as mpl
 
 
-def plot_route(route: list[int], points: np.ndarray) -> mpl.Figure:
+def plot_route(route:list[int], points:np.ndarray, title:str) -> mpl.Figure:
     """
     Plots the route on a 2D grid by connecting the given points in the specified order.
 
     Parameters:
-        - `route: list[int]` -> A list of point indices representing the visitation order.
-        - `points: numpy.ndarray` -> A 2D array of coordinates (x, y) for each point.
+        - `route: list[int]`        -> A list of point indices representing the visitation order.
+        - `points: numpy.ndarray`   -> A 2D array of coordinates (x, y) for each point.
+        - `title: str`              -> Title text to be displayed on the matplotlib figure.
 
     Returns:
         - The generated plot figure as a `matplotlib.Figure` object.
@@ -33,7 +34,7 @@ def plot_route(route: list[int], points: np.ndarray) -> mpl.Figure:
     for i, (x, y) in enumerate(points):
         ax.text(x + 1, y + 1, str(i), fontsize=9)
 
-    ax.set_title("Best Route (Initial Population)")
+    ax.set_title(title)
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.grid(True)

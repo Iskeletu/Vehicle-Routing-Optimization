@@ -14,10 +14,11 @@ Date: June 2025
 import random
 
 # Internal Modules:
+import utils
 import routing
 import plotting
 import config as cfg
-from utils import seed_user_input, generate_seeds
+import genetic_evolution
 
 # External Modules:
 import numpy as np
@@ -36,36 +37,55 @@ def main(seed:int|None) -> None:
         - `seed: int | None` -> Numerical seed for reproducibility, `None` type will result in random behavior.
     """
 
+    # Seeds the plot point generation and population:
     if seed is None:
         print("No seed provided, using random behavior.\n")
-        seed = generate_seeds(1)[0] # Generates a random 32 bit numerical seed.
-
-    
-    # Seeds the plot point generation and population:
+        seed = utils.generate_seeds(1)[0] # Generates a random 32 bit numerical seed.
     np.random.seed(seed)
     random.seed(seed)
     print(f"Seed set to: '{seed}'.\n")
 
+    # Generate points and distance matrix:
+    points = routing.gen_2d_grid(CONFIG['Number_of_Points'], CONFIG['Grid_Size'])
+    dist_matrix = cdist(points, points)
 
+    # Random Initial Population Algorithm (RIPA):
+    RIP_population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points'])
+    RIP_evaluation = [routing.evaluate_route(r, dist_matrix) for r in RIP_population]
+    best_RIP_idx = np.argmin(RIP_evaluation)
+    best_RIP_route = RIP_population[best_RIP_idx]
+    best_RIP_distance = RIP_evaluation[best_RIP_idx]
 
-    points = routing.gen_2d_grid(CONFIG['Number_of_Points'], CONFIG['Grid_Size']) # Generate random (or seeded) collection of points.
-    distance_matrix = cdist(points, points) # Compute paiwise distances.
-    population = routing.gen_initial_pop(CONFIG['Population_Size'], CONFIG['Number_of_Points']) # Generate initial population.
-    fitness_scores = [routing.evaluate_route(route, distance_matrix) for route in population] # Evaluate each route.
+    # Evolutionary Algorithm (EA):
+    EA_result = genetic_evolution.run_evolutionary_experiment(CONFIG, points, seed)
 
-    # Select the best route based on the shortest total distance:
-    best_index = np.argmin(fitness_scores)
-    best_route = population[best_index]
-    best_distance = fitness_scores[best_index]
+    # Display both random initial population and evolutionary results:
+    print(
+        "=== RANDOM INITIAL POPULATION ===\n"
+        f"Best route: {best_RIP_route}\n"
+        f"Total distance: {round(best_RIP_distance, DECIMAL_DIGITS)}\n"
+    )
 
-    # Displays plotted route:
-    plotting.display_route(plotting.plot_route(best_route, points))
+    print(
+        "=== EVOLUTIONARY ALGORITHM ===\n"
+        f"Best route: {EA_result['route']}\n"
+        f"Total distance: {round(EA_result['distance'], DECIMAL_DIGITS)}\n"
+    )
 
-    print(f"Best route found (initial population): {best_route}.")
-    print(f"Total distance: {round(best_distance, DECIMAL_DIGITS)}.")
-    print(f"\nSummary: {CONFIG['Number_of_Points']} points, population size = {CONFIG['Population_Size']}, seed: '{seed}'.\n")
+    # Plot final results from each type of evaluation:
+    plotting.display_route(plotting.plot_route(best_RIP_route, points, "Random Initial Population"))
+    plotting.display_route(plotting.plot_route(EA_result['route'], points, "Evolutionary Result"))
+
+    # Summary:
+    print(
+        "Summary:\n"
+        f"  - Number of points: {CONFIG['Number_of_Points']} points.\n"
+        f"  - Population Size: {CONFIG['Population_Size']} idividuals.\n"
+        f"  - Number of generations: {CONFIG['Number_of_Generations']} generations.\n"
+        f"  - Seed: '{seed}'.\n"
+    )
 
 
 #This is a script file.
 if __name__ == '__main__':
-    main(seed_user_input())
+    main(utils.seed_user_input())

@@ -17,7 +17,7 @@ STANDARD_PATH = Path(f'{PROJECT_DIRECTORY}\\config.INI').absolute()
 
 def _validate_config(config:dict) -> None:
     """
-    Validates if the configuration values are within acceptable bounds.
+    Private local function: Validates if the configuration values are within acceptable bounds.
 
     Parameters:
         - `config: dict` -> Configuration dictionary to validate.
@@ -32,6 +32,8 @@ def _validate_config(config:dict) -> None:
         raise ValueError("Grid_Size must be above or equal to 100")
     if not (config['Population_Size'] >= 100):
         raise ValueError("Population_Size must be above or equal to 100")
+    if not (config['Number_of_Generations'] >= 100):
+        raise ValueError("Number_of_Generations must be above or equal to 100")
     if not (config['Number_of_Seeds'] >= 1):
         raise ValueError("Number_of_Seeds must be above or equal to 1")
 
@@ -44,14 +46,15 @@ def load_config(path:Path=STANDARD_PATH) -> dict:
         - `path: str` -> (Optional) Path to the configuration file (default: '{project_directory}\\config.INI').
 
     Returns:
-        - A dictionary containing the following keys:   \n
-            `'Number_of_Points': int`                   \n
-            `'Grid_Size': int`                          \n
-            `'Population_Size': int`                    \n
-            `'Output_Folder': str`                      \n
-            `'CSV_Name': str`                           \n
-            `'Image_Name_Template': str`                \n
-            `'Number_of_Seeds': int`
+        - A dictionary type containing the following keys: \n
+            `'Number_of_Points': int`       -> .
+            `'Grid_Size': int`              -> .
+            `'Population_Size': int`        -> .
+            `'Number_of_Generations': int`  -> .
+            `'Output_Folder': str`          -> .
+            `'CSV_Name': str`               -> .
+            `'Image_Name_Template': str`    -> .
+            `'Number_of_Seeds': int`        -> .
 
     Raises:
         - `FileNotFoundError`: If the file does not exist.
@@ -73,13 +76,14 @@ def load_config(path:Path=STANDARD_PATH) -> dict:
 
     try:
         config = {
-            'Number_of_Points':     int(configfile['PARAMETERS']['Number_of_Points']),
-            'Grid_Size':            int(configfile['PARAMETERS']['Grid_Size']),
-            'Population_Size':      int(configfile['PARAMETERS']['Population_Size']),
-            'Output_Folder_Name':   str(configfile['OUTPUT']['Folder_Name']),
-            'CSV_File_Name':        str(configfile['OUTPUT']['CSV_File_Name']),
-            'Image_File_Name':      str(configfile['OUTPUT']['Image_File_Name']),
-            'Number_of_Seeds':      int(configfile['OUTPUT']['Number_of_Seeds'])
+            'Number_of_Points':         int(configfile['PARAMETERS']['Number_of_Points']),
+            'Grid_Size':                int(configfile['PARAMETERS']['Grid_Size']),
+            'Population_Size':          int(configfile['PARAMETERS']['Population_Size']),
+            'Number_of_Generations':    int(configfile['PARAMETERS']['Number_of_Generations']),
+            'Output_Folder_Name':       str(configfile['OUTPUT']['Folder_Name']),
+            'CSV_File_Name':            str(configfile['OUTPUT']['CSV_File_Name']),
+            'Image_File_Name':          str(configfile['OUTPUT']['Image_File_Name']),
+            'Number_of_Seeds':          int(configfile['OUTPUT']['Number_of_Seeds'])
         }
     except KeyError as e:
         raise ValueError(f"Missing configuration key: {e}")

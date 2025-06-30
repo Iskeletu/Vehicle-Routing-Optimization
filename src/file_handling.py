@@ -9,6 +9,7 @@ Date: June 2025
 import os
 import csv
 from pathlib import Path
+from typing import Literal
 
 # External Modules:
 import matplotlib.pyplot as mpl
@@ -17,19 +18,21 @@ import matplotlib.pyplot as mpl
 PROJECT_DIRECTORY = Path(os.path.abspath(__file__)).parent.parent.resolve()
 
 
-def save_plot(config:dict, fig:mpl.Figure, seed:str|None=None) -> None:
+def save_plot(config:dict, fig:mpl.Figure, alg_type:Literal['RIPA', 'EA'], seed:str) -> None:
     """
     Saves a matplotlib Figure to the path specified in the configuration file as a .PNG image.
 
     Parameters:
-        - `config: dict`    -> Loaded config dictionary.
-        - `fig: mpl.Figure` -> The matplotlib figure object to save.
-        - `seed: int`       -> String to replace 'seed' file name parameter.
+        - `config: dict`                    -> Loaded config dictionary.
+        - `fig: mpl.Figure`                 -> The matplotlib figure object to save.
+        - `alg_type: Literal['RIPA', 'EA']`  -> Indicates whether the plot came from a random population algorithm or the evolutionary algorithm.
+        - `seed: int`                       -> String to replace 'seed' file name parameter.
     """
 
-    if seed is None: seed = "Seed_Not_Provided"
+    if str(alg_type) not in ['RIPA', 'EA']:
+        raise ValueError(f"Invalid type_of_execution: {alg_type}. Expected 'RIPA' or 'EA'.")
 
-    path:Path = Path(f"{PROJECT_DIRECTORY}\\{config['Output_Folder_Name']}\\{str(config['Image_File_Name']).format(seed=seed)}.png")
+    path:Path = Path(f"{PROJECT_DIRECTORY}\\{config['Output_Folder_Name']}\\{str(config['Image_File_Name']).format(seed=seed)}_{str(alg_type)}.png")
     path.parent.mkdir(parents=True, exist_ok=True) # Ensures path is ok.
 
     fig.savefig(path)
