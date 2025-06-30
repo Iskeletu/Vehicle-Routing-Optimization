@@ -6,12 +6,12 @@
 !src/
 src/**
 !config.py
+!execute_experiments.py
 !file_handling.py
 !genetic_evolution.py
 !main.py
 !plotting.py
 !routing.py
-!execute_experiments.py
 !utils.py
 
 # Output directory and its contents.
