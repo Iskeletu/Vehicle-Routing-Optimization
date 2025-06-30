@@ -57,7 +57,7 @@ def main(seed:int|None) -> None:
     best_RIPA_distance = RIPA_evaluation[best_RIPA_idx]
 
     # Evolutionary Algorithm (EA):
-    EA_result = genetic_evolution.run_evolutionary_experiment(CONFIG, points, seed)
+    EA_result = genetic_evolution.execute_evolutionary_experiment(CONFIG, points, seed)
 
     # Display both random initial population and evolutionary results:
     print(

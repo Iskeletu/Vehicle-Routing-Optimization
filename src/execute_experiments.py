@@ -28,9 +28,9 @@ CONFIG = cfg.load_config()
 DECIMAL_DIGITS = 2
 
 
-def _run_comparative(seed:int) -> dict:
+def _execute_comparative(seed:int) -> dict:
     """
-    Private local function: Runs a single simulation comparison between the Random Initial Population Algorithm
+    Private local function: Executes a single simulation comparison between the Random Initial Population Algorithm
     (RIPA) and the Evolutionary Algoritm (EA) using the provided seed.
 
     Parameters:
@@ -68,7 +68,7 @@ def _run_comparative(seed:int) -> dict:
 
     # Evolutionary Algorithm (EA):
     EA_start_time = time()
-    EA_result = genetic_evolution.run_evolutionary_experiment(CONFIG, points, seed)
+    EA_result = genetic_evolution.execute_evolutionary_experiment(CONFIG, points, seed)
     best_EA_distance = round(EA_result['distance'], DECIMAL_DIGITS)
     EA_elapsed_time = round(time() - EA_start_time, DECIMAL_DIGITS)
 
@@ -91,17 +91,17 @@ def _run_comparative(seed:int) -> dict:
     }
 
 
-def run_all():
+def execute_all():
     """
-    Runs all simulations and stores results.
+    Executes all simulations and stores results.
     """
 
-    print("Running comparative simulations...\n")
+    print("Executing comparative simulations...\n")
     seed_list:list[int] = utils.generate_seeds(CONFIG['Number_of_Seeds'])
     results:list[dict] = []
 
     for seed in seed_list:
-        result = _run_comparative(seed)
+        result = _execute_comparative(seed)
         results.append(result)
 
         print(
@@ -123,4 +123,4 @@ def run_all():
 
 #This is a script file.
 if __name__ == '__main__':
-    run_all()
+    execute_all()

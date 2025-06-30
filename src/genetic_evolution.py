@@ -76,7 +76,7 @@ def _swap_mutation(route:list[int], mutation_rate:float) -> list[int]:
     return route
 
 
-def run_evolutionary_experiment(config:dict, points:np.ndarray, seed:int, crossover_rate:float=0.8, mutation_rate:float=0.1) -> dict:
+def execute_evolutionary_experiment(config:dict, points:np.ndarray, seed:int, crossover_rate:float=0.8, mutation_rate:float=0.1) -> dict:
     """
     Executes a full genetic algorithm cycle to evolve a population of routes and return the best one
     found after a number of generations.
